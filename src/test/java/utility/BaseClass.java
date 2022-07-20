@@ -5,6 +5,7 @@ import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Optional;
@@ -31,6 +32,11 @@ public class BaseClass {
 		String url = prop.getProperty("URL");
 		System.out.println("Opening url :: " + url);
 		driver.get(url);
+	}
+
+	@AfterTest
+	public void afterTestSetup() {
+		driver.switchTo().defaultContent();
 	}
 
 	@AfterClass

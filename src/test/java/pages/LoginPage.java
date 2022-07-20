@@ -25,6 +25,10 @@ public class LoginPage extends BasePage {
 	@CacheLookup
 	private WebElement btnSubmit;
 
+	@FindBy(xpath = "//div[text()=' Warning: No match for E-Mail Address and/or Password.']")
+	@CacheLookup
+	private WebElement errorMsg;
+
 	public void setEmail(String email) {
 		this.email.clear();
 		this.email.sendKeys(email);
@@ -39,4 +43,7 @@ public class LoginPage extends BasePage {
 		this.btnSubmit.click();
 	}
 
+	public boolean isAlertPresent() {
+		return this.errorMsg.isDisplayed();
+	}
 }

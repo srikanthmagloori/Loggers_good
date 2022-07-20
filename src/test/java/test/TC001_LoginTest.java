@@ -3,7 +3,7 @@ package test;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import pages.HomePage;
+import pages.Header;
 import pages.LoginPage;
 import utility.BaseClass;
 
@@ -15,7 +15,7 @@ public class TC001_LoginTest extends BaseClass {
 		String email = prop.getProperty("EMAIL");
 		String pwd = prop.getProperty("PWD");
 
-		HomePage hp = new HomePage(driver);
+		Header hp = new Header(driver);
 		testLog.info("Clicking Login button from My Account dropdown");
 		hp.clickLoginBtn();
 
