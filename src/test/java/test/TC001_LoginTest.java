@@ -3,8 +3,6 @@ package test;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.aventstack.extentreports.Status;
-
 import pages.HomePage;
 import pages.LoginPage;
 import utility.BaseClass;
@@ -13,7 +11,6 @@ public class TC001_LoginTest extends BaseClass {
 
 	@Test
 	public void loginTest() {
-		testLog = extent.createTest("Login Test");
 
 		String email = prop.getProperty("EMAIL");
 		String pwd = prop.getProperty("PWD");
@@ -24,16 +21,14 @@ public class TC001_LoginTest extends BaseClass {
 
 		LoginPage lp = new LoginPage(driver);
 
-		testLog.info("Setting Email :: " + email);
+		testLog.info("Inputting Email :: " + email);
 		lp.setEmail(email);
-		testLog.info("Setting Password");
+		testLog.info("Inputting Password");
 		lp.setPassword(pwd);
 
 		testLog.info("Clicking Login Button");
 		lp.clickLoginBtn();
 
-		Assert.assertEquals(driver.getTitle(), "My Account");
-
-		testLog.log(Status.PASS, "Successfully Passed");
+		Assert.assertEquals(driver.getTitle(), "MyAccount");
 	}
 }

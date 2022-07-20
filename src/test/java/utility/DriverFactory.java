@@ -48,7 +48,6 @@ public class DriverFactory {
 
 	public static String getSnapshot(String fileName) {
 		String fullPath = "./screenshots/" + fileName + ".png";
-
 		try {
 			File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(scrFile, new File(fullPath));
