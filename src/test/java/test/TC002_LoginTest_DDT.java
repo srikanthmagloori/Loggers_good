@@ -1,6 +1,7 @@
 package test;
 
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -31,7 +32,13 @@ public class TC002_LoginTest_DDT extends BaseClass {
 		Assert.assertTrue(checkTitle);
 		if (checkTitle)
 			header.clickLogoutBtn();
+		driver.switchTo().defaultContent();
 
+	}
+
+	@AfterTest
+	public void afterTest() {
+		driver.switchTo().defaultContent();
 	}
 
 	@DataProvider(name = "loginData")

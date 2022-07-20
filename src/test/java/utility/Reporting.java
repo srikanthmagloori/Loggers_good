@@ -48,14 +48,10 @@ public class Reporting extends BaseClass implements ITestListener {
 
 	public void onTestFailure(ITestResult result) {
 		testLog.fail(MarkupHelper.createLabel(result.getName(), ExtentColor.RED));
-
 		String screenshotPath = DriverFactory.getSnapshot(result.getName() + "_" + newDate);
 		System.out.println("Screenshot Path :: " + screenshotPath);
-//		if (!screenshotPath.isEmpty())
 		testLog.fail("Screenshot Taken : ",
 				MediaEntityBuilder.createScreenCaptureFromPath("." + screenshotPath).build());
-//		else
-//			testLog.fail("Screenshot Taken : Error in taking screenshot");
 	}
 
 	public void onTestSkipped(ITestResult result) {

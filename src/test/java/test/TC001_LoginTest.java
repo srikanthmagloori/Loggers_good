@@ -29,6 +29,6 @@ public class TC001_LoginTest extends BaseClass {
 		testLog.info("Clicking Login Button");
 		lp.clickLoginBtn();
 
-		Assert.assertEquals(driver.getTitle(), "MyAccount");
+		Assert.assertEquals(driver.getTitle(), "My Account");
 	}
 }
