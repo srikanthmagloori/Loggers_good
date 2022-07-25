@@ -7,7 +7,6 @@
 		<classes>
 			<class name="test.TC001_LoginTest" />
 			<class name="test.TC002_LoginTest_DDT" />
-			<class name="test.TC003_LogoutTest" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

@@ -15,11 +15,7 @@ public class Header extends BasePage {
 
 	@FindBy(xpath = "//a[@title='My Account']")
 	@CacheLookup
-	private WebElement btnMyAccount1;
-
-	@FindBy(xpath = "//a[@title='My Account']")
-	@CacheLookup
-	private WebElement btnMyAccount2;
+	private WebElement btnMyAccount;
 
 	@FindBy(xpath = "//a[text()='Login']")
 	@CacheLookup
@@ -30,12 +26,12 @@ public class Header extends BasePage {
 	private WebElement btnLogout;
 
 	public void clickLoginBtn() {
-		this.btnMyAccount1.click();
+		this.btnMyAccount.click();
 		this.btnLogin.click();
 	}
 
 	public void clickLogoutBtn() {
-		this.btnMyAccount2.click();
+		this.btnMyAccount.click();
 		this.btnLogout.click();
 	}
 }
