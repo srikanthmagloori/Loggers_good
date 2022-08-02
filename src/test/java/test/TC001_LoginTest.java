@@ -16,7 +16,7 @@ public class TC001_LoginTest extends BaseClass {
 	 * Checks the login functionality of the system with the given credentials
 	 * 
 	 */
-	@Test
+	@Test(testName = "Open Cart Login Test", enabled = true, priority = 0)
 	public void loginTest() {
 		String email = prop.getProperty("EMAIL");
 		String pwd = prop.getProperty("PWD");
@@ -46,14 +46,16 @@ public class TC001_LoginTest extends BaseClass {
 	 * function will run the test.
 	 * 
 	 */
-	@Test(dependsOnMethods = { "loginTest" })
+	@Test(testName = "Open Cart Logout Test", dependsOnMethods = { "loginTest" }, priority = 1)
 	public void logoutTest() {
+
 		Header header = new Header(driver);
 		testLog.info("Page title :: " + driver.getTitle());
 		testLog.info("Clicking Logout button");
 		header.clickLogoutBtn();
 
 		LogoutPage logoutPage = new LogoutPage(driver);
+
 		Assert.assertEquals(logoutPage.getLogoutHeading(), "Account Logout");
 	}
 }

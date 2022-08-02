@@ -1,7 +1,7 @@
 package test;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -14,9 +14,12 @@ public class TC002_LoginTest_DDT extends BaseClass {
 
 	private static ExcelReader excel;
 
-	@Test(dataProvider = "loginData")
+	private static int count = 1;
+
+	@Test(testName = "Open Cart Login - Data Driven Test", dataProvider = "loginData")
 	public void loginTestDDT(String email, String password) {
 		Header header = new Header(driver);
+		testLog.info("Executing for test data number " + count);
 		testLog.info("Clicking Login button from My Account dropdown");
 		header.clickLoginBtn();
 		LoginPage loginPage = new LoginPage(driver);
@@ -32,13 +35,12 @@ public class TC002_LoginTest_DDT extends BaseClass {
 		Assert.assertTrue(checkTitle);
 		if (checkTitle)
 			header.clickLogoutBtn();
-		driver.switchTo().defaultContent();
-
 	}
 
-	@AfterTest
-	public void afterTest() {
-		driver.switchTo().defaultContent();
+	@AfterMethod
+	public void afterMethod() {
+		driver.navigate().to(prop.getProperty("OPEN_CART_URL"));
+		count = count + 1;
 	}
 
 	@DataProvider(name = "loginData")

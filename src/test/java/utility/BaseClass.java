@@ -25,19 +25,20 @@ public class BaseClass {
 
 		browser = (browser == null) ? prop.getProperty("BROWSER") : browser;
 		driver = DriverFactory.setBrowserInstance(browser);
-		System.out.println("===============================================\n");
-		System.out.println("Driver Started in " + browser + " browser");
+		Loggers.breakLine();
+		Loggers.heading("Driver Started in " + browser + " browser");
 
-		String url = prop.getProperty("URL");
-		System.out.println("Opening url :: " + url);
+		String url = prop.getProperty("OPEN_CART_URL");
+		Loggers.info("Test Execution Started");
+		Loggers.info("Opening url -> " + url);
 		driver.get(url);
 	}
 
 	@AfterClass
 	public void tearDown() {
-		System.out.println("Testing Completed");
-		System.out.println("Closing the browser instance");
-		System.out.println("\n===============================================");
+		Loggers.nextLine();
+		Loggers.info("Test Execution Completed");
+		Loggers.info("Closing the browser instance");
 		driver.quit();
 	}
 }

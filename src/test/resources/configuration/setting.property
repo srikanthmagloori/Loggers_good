@@ -1,4 +1,5 @@
-URL=https://naveenautomationlabs.com/opencart/
+==================OPEN CART=========================
+OPEN_CART_URL=https://naveenautomationlabs.com/opencart/
 
 EMAIL=admin@xyz1.com
 PWD=admin@123

@@ -1,5 +1,7 @@
 package pages;
 
+import static utility.DriverFactory.waitForElemenetToBeDisplayed;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -40,6 +42,7 @@ public class LoginPage extends BasePage {
 	}
 
 	public void clickLoginBtn() {
+		waitForElemenetToBeDisplayed(this.btnSubmit);
 		this.btnSubmit.click();
 	}
 
