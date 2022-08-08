@@ -27,7 +27,8 @@ public class Reporting extends BaseClass implements ITestListener {
 	public void onStart(ITestContext context) {
 		Date date = new Date();
 		newDate = date.toString().replaceAll(" ", "_").replaceAll(":", "_");
-		reportPath = "./reports/Report_" + newDate + ".html";
+//		reportPath = "./reports/Report_" + newDate + ".html";
+		reportPath = "./reports/Report.html";
 		sparkReport = new ExtentSparkReporter(reportPath);
 		try {
 			final File sparkConfig = new File(".//src//test//resources//configuration//spark-config.xml");
@@ -67,6 +68,7 @@ public class Reporting extends BaseClass implements ITestListener {
 		String logText = "<b>Test Method :: " + result.getName() + " Failed</b>";
 		Markup m = MarkupHelper.createLabel(logText, ExtentColor.RED);
 		testLog.fail(m);
+		testLog.fail(result.getThrowable());
 
 		String screenshotPath = DriverFactory.getSnapshot(result.getName() + "_" + newDate);
 		Loggers.error("Screenshot Path -> " + screenshotPath);

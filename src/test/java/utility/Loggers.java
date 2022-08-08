@@ -22,7 +22,7 @@ public class Loggers {
 		return getCurrentTimeAndDate() + color + message + ANSI_RESET;
 	}
 
-	public static void heading(String message) {
+	public static void config(String message) {
 		System.out.println(formattedMessage(ANSI_CYAN, message));
 	}
 

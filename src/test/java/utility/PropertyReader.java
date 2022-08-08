@@ -12,9 +12,12 @@ public class PropertyReader {
 		if (propInstance == null) {
 			propInstance = new Properties();
 			try {
-				propInstance.load(new FileInputStream(".\\src\\test\\resources\\configuration\\setting.property"));
+				String propertyFilePath = ".\\src\\test\\resources\\configuration\\setting.property";
+				Loggers.config("Property file path " + propertyFilePath);
+
+				propInstance.load(new FileInputStream(propertyFilePath));
 			} catch (Exception e) {
-				System.out.println("Error with reading property File " + e.getMessage());
+				Loggers.error("Error with reading property File " + e.getMessage());
 			}
 			return propInstance;
 		} else {

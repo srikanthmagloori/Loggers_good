@@ -5,7 +5,10 @@
 	<test thread-count="5" name="Login Test">
 		<parameter name="browser" value="edge" />
 		<classes>
+			<!-- 
+			-->
 			<class name="test.TC001_LoginTest" />
+			<class name="test.TC003_DesktopSearchTest" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

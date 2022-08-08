@@ -1,6 +1,6 @@
 package pages;
 
-import static utility.DriverFactory.waitForElemenetToBeDisplayed;
+import static utility.DriverFactory.waitForElementToBeDisplayed;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -27,18 +27,18 @@ public class Header extends BasePage {
 	private WebElement btnLogout;
 
 	public void clickLoginBtn() {
-		waitForElemenetToBeDisplayed(this.btnMyAccount);
+		waitForElementToBeDisplayed(this.btnMyAccount);
 		this.btnMyAccount.click();
 
-		waitForElemenetToBeDisplayed(this.btnLogin);
+		waitForElementToBeDisplayed(this.btnLogin);
 		this.btnLogin.click();
 	}
 
 	public void clickLogoutBtn() {
-		waitForElemenetToBeDisplayed(this.btnMyAccount);
+		waitForElementToBeDisplayed(this.btnMyAccount);
 		this.btnMyAccount.click();
 
-		waitForElemenetToBeDisplayed(this.btnLogout);
+		waitForElementToBeDisplayed(this.btnLogout);
 		this.btnLogout.click();
 	}
 }

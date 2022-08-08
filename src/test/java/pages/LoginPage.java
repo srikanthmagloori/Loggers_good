@@ -1,6 +1,6 @@
 package pages;
 
-import static utility.DriverFactory.waitForElemenetToBeDisplayed;
+import static utility.DriverFactory.waitForElementToBeDisplayed;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -42,7 +42,7 @@ public class LoginPage extends BasePage {
 	}
 
 	public void clickLoginBtn() {
-		waitForElemenetToBeDisplayed(this.btnSubmit);
+		waitForElementToBeDisplayed(this.btnSubmit);
 		this.btnSubmit.click();
 	}
 

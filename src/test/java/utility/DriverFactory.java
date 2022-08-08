@@ -1,4 +1,3 @@
-
 package utility;
 
 import java.io.File;
@@ -6,6 +5,7 @@ import java.io.IOException;
 import java.time.Duration;
 
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -46,7 +46,10 @@ public class DriverFactory {
 			break;
 		}
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		Loggers.config("Implicit wait time for driver -> 10 seconds");
+
 		wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		Loggers.config("Explicit wait time for driver -> 5 seconds");
 		return driver;
 	}
 
@@ -57,13 +60,17 @@ public class DriverFactory {
 			FileUtils.copyFile(scrFile, new File(fullPath));
 			return fullPath;
 		} catch (IOException e) {
-			System.out.println("Error with Screenshot");
+			Loggers.error("Error with Screenshot");
 			return null;
 		}
 	}
 
-	public static void waitForElemenetToBeDisplayed(WebElement element) {
+	public static void waitForElementToBeDisplayed(WebElement element) {
 		wait.until(ExpectedConditions.visibilityOf(element));
+	}
+
+	public static void waitForAllElementsToBeDisplayed(By locator) {
+		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
 	}
 
 }
