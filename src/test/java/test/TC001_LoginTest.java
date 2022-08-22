@@ -3,59 +3,28 @@ package test;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import pages.Header;
 import pages.LoginPage;
-import pages.LogoutPage;
+import pages.NavbarComp;
 import utility.BaseClass;
+import utility.Loggers;
 
 public class TC001_LoginTest extends BaseClass {
 
-	/**
-	 * Login Test
-	 * 
-	 * Checks the login functionality of the system with the given credentials
-	 * 
-	 */
-	@Test(testName = "Open Cart Login Test", enabled = true, priority = 0)
+	@Test(testName = "TC001 Login Test", groups = { "positive", "smoke" })
 	public void loginTest() {
+		testLog.assignCategory("positive", "smoke");
+
+		NavbarComp navbar = new NavbarComp(driver, testLog);
+		navbar.clickOnSignInButton();
+
+		// Parameters for the test
 		String email = prop.getProperty("EMAIL");
-		String pwd = prop.getProperty("PWD");
+		String password = prop.getProperty("PASSWORD");
 
-		Header header = new Header(driver);
-		testLog.info("Clicking Login button from My Account dropdown");
-		header.clickLoginBtn();
+		LoginPage loginPage = new LoginPage(driver, testLog);
+		loginPage.doLogin(email, password);
 
-		LoginPage loginPage = new LoginPage(driver);
-
-		testLog.info("Inputting Email :: " + email);
-		loginPage.setEmail(email);
-		testLog.info("Inputting Password");
-		loginPage.setPassword(pwd);
-
-		testLog.info("Clicking Login Button");
-		loginPage.clickLoginBtn();
-
-		Assert.assertEquals(driver.getTitle(), "My Account");
+		Assert.assertEquals(navbar.getCurrentUsername(), "Francis");
 	}
 
-	/**
-	 * Logout Test
-	 * 
-	 * Checks the logout functionality of the system if the correct credentials have
-	 * been provided i.e. when the lognTest() is successfully passed, then this
-	 * function will run the test.
-	 * 
-	 */
-	@Test(testName = "Open Cart Logout Test", dependsOnMethods = { "loginTest" }, priority = 1)
-	public void logoutTest() {
-
-		Header header = new Header(driver);
-		testLog.info("Page title :: " + driver.getTitle());
-		testLog.info("Clicking Logout button");
-		header.clickLogoutBtn();
-
-		LogoutPage logoutPage = new LogoutPage(driver);
-
-		Assert.assertEquals(logoutPage.getLogoutHeading(), "Account Logout");
-	}
 }

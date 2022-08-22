@@ -3,6 +3,7 @@ package utility;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -19,13 +20,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class DriverFactory {
+public class Driver {
 	static WebDriver driver;
 	static WebDriverWait wait;
+	static Properties prop;
 
 	public static WebDriver setBrowserInstance(String browserName) {
-		switch (browserName.toLowerCase()) {
+		prop = PropertyReader.getInstance();
+		int timeInSeconds = Integer.parseInt(prop.getProperty("WAIT_TIMEOUT_IN_SECS"));
 
+		switch (browserName.toLowerCase().trim()) {
 		case "edge":
 			WebDriverManager.edgedriver().setup();
 			driver = new EdgeDriver();
@@ -41,15 +45,14 @@ public class DriverFactory {
 			WebDriverManager.chromedriver().setup();
 			ChromeOptions cp = new ChromeOptions();
 			cp.addArguments("--disable-notifications");
-
 			driver = new ChromeDriver(cp);
 			break;
 		}
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		Loggers.config("Implicit wait time for driver -> 10 seconds");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeInSeconds));
+		Loggers.config("Implicit wait time for driver -> " + timeInSeconds + " seconds");
 
-		wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-		Loggers.config("Explicit wait time for driver -> 5 seconds");
+		wait = new WebDriverWait(driver, Duration.ofSeconds(timeInSeconds));
+		Loggers.config("Explicit wait time for driver -> " + timeInSeconds + "  seconds");
 		return driver;
 	}
 

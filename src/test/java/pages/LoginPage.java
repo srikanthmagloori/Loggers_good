@@ -1,52 +1,44 @@
 package pages;
 
-import static utility.DriverFactory.waitForElementToBeDisplayed;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
+import com.aventstack.extentreports.ExtentTest;
+
 import utility.BasePage;
+import utility.Driver;
 
 public class LoginPage extends BasePage {
 
-	public LoginPage(WebDriver driver) {
-		super(driver);
+	public LoginPage(WebDriver driver, ExtentTest test) {
+		super(driver, test);
 	}
 
-	@FindBy(id = "input-email")
-	@CacheLookup
-	private WebElement email;
+	@FindBy(id = "ap_email")
+	private WebElement emailInput;
 
-	@FindBy(id = "input-password")
-	@CacheLookup
-	private WebElement password;
+	@FindBy(id = "continue")
+	private WebElement continueBtn;
 
-	@FindBy(xpath = "//input[@value='Login']")
-	@CacheLookup
-	private WebElement btnSubmit;
+	@FindBy(id = "ap_password")
+	private WebElement passwordInput;
 
-	@FindBy(xpath = "//div[text()=' Warning: No match for E-Mail Address and/or Password.']")
-	@CacheLookup
-	private WebElement errorMsg;
+	@FindBy(id = "signInSubmit")
+	private WebElement signInBtn;
 
-	public void setEmail(String email) {
-		this.email.clear();
-		this.email.sendKeys(email);
+	public void doLogin(String email, String password) {
+		Driver.waitForElementToBeDisplayed(this.emailInput);
+		this.emailInput.sendKeys(email);
+		test.info("Inputting email -> " + email);
+		this.continueBtn.click();
+		test.info("Clicking on continue button");
+
+		Driver.waitForElementToBeDisplayed(this.passwordInput);
+		test.info("Inputting password -> " + password);
+		this.passwordInput.sendKeys(password);
+		test.info("Clicking on sign in button");
+		this.signInBtn.click();
 	}
 
-	public void setPassword(String password) {
-		this.password.clear();
-		this.password.sendKeys(password);
-	}
-
-	public void clickLoginBtn() {
-		waitForElementToBeDisplayed(this.btnSubmit);
-		this.btnSubmit.click();
-	}
-
-	public boolean isAlertPresent() {
-		return this.errorMsg.isDisplayed();
-	}
 }

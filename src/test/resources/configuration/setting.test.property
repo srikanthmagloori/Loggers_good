@@ -1,0 +1,7 @@
+WAIT_TIMEOUT_IN_SECS=5
+BROWSER=EDGE
+ENV=QA
+
+URL=https://www.amazon.in/
+EMAIL=francismath360@gmail.com
+PASSWORD=Final@29

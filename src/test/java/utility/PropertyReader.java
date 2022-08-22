@@ -12,7 +12,7 @@ public class PropertyReader {
 		if (propInstance == null) {
 			propInstance = new Properties();
 			try {
-				String propertyFilePath = ".\\src\\test\\resources\\configuration\\setting.property";
+				String propertyFilePath = ".\\src\\test\\resources\\configuration\\setting.test.property";
 				Loggers.config("Property file path " + propertyFilePath);
 
 				propInstance.load(new FileInputStream(propertyFilePath));

@@ -25,23 +25,33 @@ public class Reporting extends BaseClass implements ITestListener {
 	private static String reportPath;
 
 	public void onStart(ITestContext context) {
+
 		Date date = new Date();
 		newDate = date.toString().replaceAll(" ", "_").replaceAll(":", "_");
-//		reportPath = "./reports/Report_" + newDate + ".html";
-		reportPath = "./reports/Report.html";
+
+		Loggers.breakLine();
+		Loggers.info("Reading Config file...");
+		prop = PropertyReader.getInstance();
+		String env = prop.getProperty("ENV", "QA");
+		Loggers.info("Setting Test Environment :: " + env);
+		if (!env.equals("QA"))
+			reportPath = "./reports/Report_" + newDate + ".html";
+		else
+			reportPath = "./reports/Report.html";
 		sparkReport = new ExtentSparkReporter(reportPath);
+
 		try {
 			final File sparkConfig = new File(".//src//test//resources//configuration//spark-config.xml");
 			sparkReport.loadXMLConfig(sparkConfig);
 		} catch (IOException e) {
-			System.out.println("Error in reading SparkReporter Config File");
+			Loggers.error("Error in reading SparkReporter Config File");
 		}
 
 		extent = new ExtentReports();
 		extent.attachReporter(sparkReport);
 		extent.setSystemInfo("Host name", "localhost");
-		extent.setSystemInfo("Environemnt", "QA");
-		extent.setSystemInfo("user", "Nikhil");
+		extent.setSystemInfo("Environment", "QA");
+		extent.setSystemInfo("User", "Nikhil");
 	}
 
 	public void onTestStart(ITestResult result) {
@@ -70,7 +80,7 @@ public class Reporting extends BaseClass implements ITestListener {
 		testLog.fail(m);
 		testLog.fail(result.getThrowable());
 
-		String screenshotPath = DriverFactory.getSnapshot(result.getName() + "_" + newDate);
+		String screenshotPath = Driver.getSnapshot(result.getName() + "_" + newDate);
 		Loggers.error("Screenshot Path -> " + screenshotPath);
 		testLog.fail("Screenshot Taken : ",
 				MediaEntityBuilder.createScreenCaptureFromPath("." + screenshotPath).build());
