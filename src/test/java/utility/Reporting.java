@@ -78,7 +78,9 @@ public class Reporting extends BaseClass implements ITestListener {
 		String logText = "<b>Test Method :: " + result.getName() + " Failed</b>";
 		Markup m = MarkupHelper.createLabel(logText, ExtentColor.RED);
 		testLog.fail(m);
-		testLog.fail(result.getThrowable());
+		String throwableMessage = "Error Message :: " + result.getThrowable().getLocalizedMessage();
+		testLog.fail(throwableMessage);
+		Loggers.error(throwableMessage);
 
 		String screenshotPath = Driver.getSnapshot(result.getName() + "_" + newDate);
 		Loggers.error("Screenshot Path -> " + screenshotPath);

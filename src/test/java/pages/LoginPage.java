@@ -39,6 +39,7 @@ public class LoginPage extends BasePage {
 		this.passwordInput.sendKeys(password);
 		test.info("Clicking on sign in button");
 		this.signInBtn.click();
+
 	}
 
 }
