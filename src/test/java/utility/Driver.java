@@ -52,7 +52,7 @@ public class Driver {
 		Loggers.config("Implicit wait time for driver -> " + timeInSeconds + " seconds");
 
 		wait = new WebDriverWait(driver, Duration.ofSeconds(timeInSeconds));
-		Loggers.config("Explicit wait time for driver -> " + timeInSeconds + "  seconds");
+		Loggers.config("Explicit wait time for driver -> " + timeInSeconds + " seconds");
 		return driver;
 	}
 
@@ -72,8 +72,16 @@ public class Driver {
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
 
-	public static void waitForAllElementsToBeDisplayed(By locator) {
-		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+	public static void waitForAllElementsToBeDisplayed(String xpathLocator) {
+		wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(xpathLocator)));
+	}
+
+	public static void waitForElementToBePresent(String xpathLocator) {
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpathLocator)));
+	}
+
+	public static void waitForAllElementsToBePresent(String xpathLocator) {
+		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(xpathLocator)));
 	}
 
 }
